@@ -1,0 +1,126 @@
+html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #ced3dc;
+  overflow-y: scroll;
+}
+
+a, a:active, a:focus, a:hover, a:visited {
+  color: black;
+  text-decoration: none;
+}
+
+.icon {
+  width: 1.25em;
+  height: 1.25em;
+}
+
+.random {
+  margin-top: 1em;
+}
+
+.SearchGroup {
+  width: 100%;
+  padding: 1em;
+}
+
+.SearchResults {
+  margin: 0;
+  padding: 0;
+}
+
+.SearchResult {
+  clear: left;
+  background-color: #e3e6e8;
+  border: solid 1px #717478;
+  border-radius: 4px;
+  margin-bottom: 0.5em;
+  min-height: 100px;
+  transition: background-color 0.33s ease;
+  animation: fadein 0.33s;
+}
+
+.SearchResultText {
+  margin: 1em;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.SearchResultText p {
+  margin: 0;
+  padding: 0;
+  color: dimgray;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.SearchResultText h2 {
+  margin: 0;
+  padding: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.SearchResult:hover {
+  color: white;
+  background-color: #3a506b;
+  border: solid 1px #edeff1;
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,0.37);
+}
+
+.SearchResult:hover p {
+  color: white;
+}
+
+.SearchResultThumbnail {
+  margin-right: 1em;
+  width: 100px;
+  height: 100px;
+  float: left;
+}
+
+.SearchResult img {
+  /*border: 4px solid white;*/
+  border-radius: 4px;
+}
+
+@keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@media (max-width: 320px) {
+  body {
+    font-size: 12px;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+
+  h2 {
+    font-size: 1.625em;
+  }
+
+  img {
+    max-width: 64px;
+    max-height: 64px;
+  }
+
+  .SearchResult {
+    min-height: 64px;
+  }
+
+  .SearchResultThumbnail {
+    width: 64px;
+    height: 64px;
+  }
+}
