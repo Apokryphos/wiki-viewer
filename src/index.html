@@ -14,15 +14,15 @@
     <div class="container">
 
       <div class="row">
-      <div class="SearchBar">
+      <div>
 
-          <div class="SearchGroup text-center">
-            <h1 class="text-center">Wikipedia Viewer</h1>
+          <div class="search-group text-center">
+            <h1>Wikipedia Viewer</h1>
             <div class="input-group">
-              <label for="Search" class="sr-only">Search</label>
-              <input id="SearchInput" type="text" class="form-control" aria-label="..." placeholder="Search for Wikipedia articles..." title="Search terms" autofocus>
+              <label for="search-input" class="sr-only">Search</label>
+              <input id="search-input" type="text" class="form-control" aria-label="..." placeholder="Search for Wikipedia articles..." title="Search terms" autofocus>
               <div class="input-group-btn">
-                <button id="ClearButton" class="btn btn-default" type="button" title="Clear search terms" style="display: none">
+                <button id="clear-button" class="btn btn-default" type="button" title="Clear search terms" style="display: none">
                   <i class="fa fa-times-circle" aria-hidden="true"></i>
                 </button>
                 <button class="btn btn-default" type="button" title="Search">
@@ -42,14 +42,14 @@
         </div>
       </div>
 
-      <!-- SearchResults -->
-      <div id="SearchResults">
-        <!-- SearchResult template -->
-        <a id="SearchResultTemplate" class="SearchResult" style="display: none">
-          <div class="SearchResultThumbnail">
+      <!-- Search results -->
+      <div id="search-results">
+        <!-- Search result template -->
+        <a id="search-result-template" class="search-result" style="display: none">
+          <div class="search-result-thumbnail">
             <img class="center-block img-responsive" src="">
           </div>
-          <div class="SearchResultText">
+          <div class="search-result-text">
             <h2>Title</h2>
             <p>Description</p>
           </div>

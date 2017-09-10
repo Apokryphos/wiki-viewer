@@ -58,7 +58,7 @@ function fetchJson(searchTerm, callback) {
 
 function updateSearch()
 {
-  let searchTerm = document.getElementById('SearchInput').value;
+  let searchTerm = document.getElementById('search-input').value;
 
   if (searchTerm)
   {
@@ -68,12 +68,12 @@ function updateSearch()
       {
         if (!data || !data.query)
         {
-          document.getElementById('ClearButton').style.display = 'none';
+          document.getElementById('clear-button').style.display = 'none';
           hideSearchResultContainers();
         }
         else
         {
-          document.getElementById('ClearButton').style.display = 'initial';
+          document.getElementById('clear-button').style.display = 'initial';
           populateSearchResults(data.query.pages);
         }
       }
@@ -81,7 +81,7 @@ function updateSearch()
   }
   else
   {
-    document.getElementById('ClearButton').style.display = 'none';
+    document.getElementById('clear-button').style.display = 'none';
     hideSearchResultContainers();
   }
 }
@@ -156,7 +156,7 @@ function populateSearchResults(pages)
 function createSearchResultElements()
 {
   //  Find template element for search results
-  let template = document.getElementById('SearchResultTemplate');
+  let template = document.getElementById('search-result-template');
   template.id = '';
 
   let fragment = document.createDocumentFragment();
@@ -180,7 +180,7 @@ function createSearchResultElements()
   }
 
   //  Add template copies to document
-  const searchResultsElement = document.getElementById('SearchResults');
+  const searchResultsElement = document.getElementById('search-results');
   searchResultsElement.append(fragment);
 
   // Get the thumbnail div size after media queries.
@@ -190,7 +190,7 @@ function createSearchResultElements()
   template.style.left = '-99999px';
   template.style.display = 'initial';
 
-  let thumbnailDiv = template.getElementsByClassName('SearchResultThumbnail')[0];
+  let thumbnailDiv = template.getElementsByClassName('search-result-thumbnail')[0];
   thumbnailSize = thumbnailDiv.clientWidth - borderSize;
 
   //  Remove template from document after getting size
@@ -199,7 +199,7 @@ function createSearchResultElements()
 
 function clearSearchTerms()
 {
-  document.getElementById('SearchInput').value = '';
+  document.getElementById('search-input').value = '';
   updateSearch();
 }
 
@@ -207,12 +207,12 @@ function init()
 {
   createSearchResultElements();
 
-  const searchInputElement = document.getElementById('SearchInput');
+  const searchInputElement = document.getElementById('search-input');
   searchInputElement.addEventListener('input', function() {
       updateSearch();
   });
 
-  document.getElementById('ClearButton').onclick = clearSearchTerms;
+  document.getElementById('clear-button').onclick = clearSearchTerms;
 
   updateSearch();
 }

@@ -20,21 +20,21 @@ a, a:active, a:focus, a:hover, a:visited {
   height: 1.25em;
 }
 
-.random {
+  .random {
   margin-top: 1em;
 }
 
-.SearchGroup {
+.search-group {
   width: 100%;
   padding: 1em;
 }
 
-.SearchResults {
+.search-results {
   margin: 0;
   padding: 0;
 }
 
-.SearchResult {
+.search-result {
   clear: left;
   background-color: #e3e6e8;
   border: solid 1px #717478;
@@ -45,14 +45,14 @@ a, a:active, a:focus, a:hover, a:visited {
   animation: fadein 0.33s;
 }
 
-.SearchResultText {
+.search-result-text {
   margin: 1em;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
 }
 
-.SearchResultText p {
+.search-result-text p {
   margin: 0;
   padding: 0;
   color: dimgray;
@@ -61,7 +61,7 @@ a, a:active, a:focus, a:hover, a:visited {
   overflow: hidden;
 }
 
-.SearchResultText h2 {
+.search-result-text h2 {
   margin: 0;
   padding: 0;
   text-overflow: ellipsis;
@@ -69,25 +69,25 @@ a, a:active, a:focus, a:hover, a:visited {
   overflow: hidden;
 }
 
-.SearchResult:hover {
+.search-result:hover {
   color: white;
   background-color: #3a506b;
   border: solid 1px #edeff1;
   box-shadow: 0 1px 4px 0 rgba(0,0,0,0.37);
 }
 
-.SearchResult:hover p {
+.search-result:hover p {
   color: white;
 }
 
-.SearchResultThumbnail {
+.search-result-thumbnail {
   margin-right: 1em;
   width: 100px;
   height: 100px;
   float: left;
 }
 
-.SearchResult img {
+.search-result img {
   /*border: 4px solid white;*/
   border-radius: 4px;
 }
@@ -115,11 +115,11 @@ a, a:active, a:focus, a:hover, a:visited {
     max-height: 64px;
   }
 
-  .SearchResult {
+  .search-result {
     min-height: 64px;
   }
 
-  .SearchResultThumbnail {
+  .search-result-thumbnail {
     width: 64px;
     height: 64px;
   }
