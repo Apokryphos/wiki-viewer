@@ -5,12 +5,12 @@ var searchResultContainers = [];
 
 function hideSearchResultContainer(container)
 {
-  container.node.style.display = "none";
+  container.node.style.display = 'none';
 }
 
 function showSearchResultContainer(container)
 {
-  container.node.style.display = "block";
+  container.node.style.display = 'block';
 }
 
 function hideSearchResultContainers()
@@ -58,7 +58,7 @@ function fetchJson(searchTerm, callback) {
 
 function updateSearch()
 {
-  let searchTerm = document.getElementById("SearchInput").value;
+  let searchTerm = document.getElementById('SearchInput').value;
 
   if (searchTerm)
   {
@@ -68,12 +68,12 @@ function updateSearch()
       {
         if (!data || !data.query)
         {
-          document.getElementById("ClearButton").style.display = "none";
+          document.getElementById('ClearButton').style.display = 'none';
           hideSearchResultContainers();
         }
         else
         {
-          document.getElementById("ClearButton").style.display = "initial";
+          document.getElementById('ClearButton').style.display = 'initial';
           populateSearchResults(data.query.pages);
         }
       }
@@ -81,7 +81,7 @@ function updateSearch()
   }
   else
   {
-    document.getElementById("ClearButton").style.display = "none";
+    document.getElementById('ClearButton').style.display = 'none';
     hideSearchResultContainers();
   }
 }
@@ -89,7 +89,7 @@ function updateSearch()
 function populateSearchResults(pages)
 {
   const pageCount = pages.length;
-  // console.log("populateSearchResults: " + pageCount );
+  // console.log('populateSearchResults: '' + pageCount );
 
   for (let e = 0; e < searchResultCount; ++e)
   {
@@ -101,30 +101,30 @@ function populateSearchResults(pages)
     {
       let page = pages[e];
 
-      container.link.href = "http://en.wikipedia.org/wiki?curid=" + page.pageid;
+      container.link.href = 'http://en.wikipedia.org/wiki?curid=' + page.pageid;
 
       let nodeImg = container.getChild
 
       let thumbnail = page.thumbnail;
       if (thumbnail)
       {
-        container.img.style.display = "none";
+        container.img.style.display = 'none';
 
         let marginHorz = (borderSize / 2) + (thumbnailSize - thumbnail.width) / 2;
         let marginVert = (borderSize / 2) + (thumbnailSize - thumbnail.height) / 2;
-        container.img.style.margin = marginVert + "px " + marginHorz + "px";
+        container.img.style.margin = marginVert + 'px ' + marginHorz + 'px';
 
         container.img.width = thumbnail.width;
         container.img.height = thumbnail.height;
 
         container.img.src = thumbnail.source;
 
-        container.img.style.display = "initial";
+        container.img.style.display = 'initial';
       }
       else
       {
-        container.img.style.display = "none";
-        container.img.src = "";
+        container.img.style.display = 'none';
+        container.img.src = '';
         container.img.width = thumbnailSize;
         container.img.height = thumbnailSize;
       }
@@ -135,13 +135,13 @@ function populateSearchResults(pages)
           page.terms.description &&
           page.terms.description.length >= 1)
       {
-        container.description.style.display = "initial";
+        container.description.style.display = 'initial';
         container.description.innerHTML = page.terms.description[0];
       }
       else
       {
-        container.description.style.display = "none";
-        container.description.innerHTML = "";
+        container.description.style.display = 'none';
+        container.description.innerHTML = '';
       }
 
       showSearchResultContainer(container);
@@ -156,8 +156,8 @@ function populateSearchResults(pages)
 function createSearchResultElements()
 {
   //  Find template element for search results
-  let template = document.getElementById("SearchResultTemplate");
-  template.id = "";
+  let template = document.getElementById('SearchResultTemplate');
+  template.id = '';
 
   let fragment = document.createDocumentFragment();
 
@@ -169,10 +169,10 @@ function createSearchResultElements()
     let container =
     {
       node: node,
-      link: node,//.getElementsByTagName("a")[0],
-      img: node.getElementsByTagName("img")[0],
-      title: node.getElementsByTagName("h2")[0],
-      description: node.getElementsByTagName("p")[0]
+      link: node,//.getElementsByTagName('a')[0],
+      img: node.getElementsByTagName('img')[0],
+      title: node.getElementsByTagName('h2')[0],
+      description: node.getElementsByTagName('p')[0]
     };
 
     searchResultContainers.push(container);
@@ -186,11 +186,11 @@ function createSearchResultElements()
   // Get the thumbnail div size after media queries.
   // Hidden elements have a size of zero, so move the template
   // element off the page, show it and then get the size.
-  template.style.position = "absolute";
-  template.style.left = "-99999px";
-  template.style.display = "initial";
+  template.style.position = 'absolute';
+  template.style.left = '-99999px';
+  template.style.display = 'initial';
 
-  let thumbnailDiv = template.getElementsByClassName("SearchResultThumbnail")[0];
+  let thumbnailDiv = template.getElementsByClassName('SearchResultThumbnail')[0];
   thumbnailSize = thumbnailDiv.clientWidth - borderSize;
 
   //  Remove template from document after getting size
@@ -199,7 +199,7 @@ function createSearchResultElements()
 
 function clearSearchTerms()
 {
-  document.getElementById("SearchInput").value = "";
+  document.getElementById('SearchInput').value = '';
   updateSearch();
 }
 
@@ -212,7 +212,7 @@ function init()
       updateSearch();
   });
 
-  document.getElementById("ClearButton").onclick = clearSearchTerms;
+  document.getElementById('ClearButton').onclick = clearSearchTerms;
 
   updateSearch();
 }
