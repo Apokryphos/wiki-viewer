@@ -21,29 +21,49 @@ function hideSearchResultContainers()
   }
 }
 
+function fetchJson(searchTerm, callback) {
+  var request = new XMLHttpRequest();
+
+  const url = `https://en.wikipedia.org/w/api.php?
+    action=query&
+    origin=*&
+    formatversion=2&
+    generator=prefixsearch&
+    prop=pageimages|pageterms&
+    piprop=thumbnail&
+    pithumbsize=${thumbnailSize}&
+    pilimit=10&
+    gpssearch=${encodeURIComponent(searchTerm)}&
+    gpslimit=${searchResultCount}&
+    redirects=true&
+    wbptterms=description&
+    format=json`;
+
+  request.open('GET', url, true);
+
+  request.onload = function() {
+    if (request.status >= 200 && request.status < 400) {
+      const data = JSON.parse(request.responseText);
+      callback(data);
+    } else {
+      //  Server returned error
+    }
+  };
+
+  request.onerror = function() {
+  };
+
+  request.send();
+}
+
 function updateSearch()
 {
   let searchTerm = document.getElementById("SearchInput").value;
 
   if (searchTerm)
   {
-    $.getJSON(
-      "https://en.wikipedia.org/w/api.php",
-      {
-        action: "query",
-        origin: "*",
-        formatversion: 2,
-        generator: "prefixsearch",
-        prop: "pageimages|pageterms",
-        piprop: "thumbnail",
-        pithumbsize: thumbnailSize,
-        pilimit: 10,
-        gpssearch: searchTerm,
-        gpslimit: searchResultCount,
-        redirects: true,
-        wbptterms: "description",
-        format: "json"
-      },
+    fetchJson(
+      searchTerm,
       function(data)
       {
         if (!data || !data.query)
@@ -160,7 +180,8 @@ function createSearchResultElements()
   }
 
   //  Add template copies to document
-  $("#SearchResults").append(fragment);
+  const searchResultsElement = document.getElementById('SearchResults');
+  searchResultsElement.append(fragment);
 
   // Get the thumbnail div size after media queries.
   // Hidden elements have a size of zero, so move the template
@@ -186,7 +207,8 @@ function init()
 {
   createSearchResultElements();
 
-  $('#SearchInput').bind('input', function() {
+  const searchInputElement = document.getElementById('SearchInput');
+  searchInputElement.addEventListener('input', function() {
       updateSearch();
   });
 
@@ -195,7 +217,7 @@ function init()
   updateSearch();
 }
 
-$(document).ready(function()
+document.addEventListener('DOMContentLoaded', () =>
 {
    init();
 });
