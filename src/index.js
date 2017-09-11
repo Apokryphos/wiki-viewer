@@ -2,26 +2,22 @@ var thumbnailSize = 128;
 const searchResultCount = 12;
 var searchResultContainers = [];
 
-function hideSearchResultContainer(container)
-{
+function hideSearchResultContainer(container) {
   container.node.style.display = 'none';
 }
 
-function showSearchResultContainer(container)
-{
+function showSearchResultContainer(container) {
   container.node.style.display = 'block';
 }
 
-function hideSearchResultContainers()
-{
-  for (let e = 0; e < searchResultCount; ++e)
-  {
+function hideSearchResultContainers() {
+  for (let e = 0; e < searchResultCount; ++e) {
     hideSearchResultContainer(searchResultContainers[e]);
   }
 }
 
 function fetchJson(searchTerm, callback) {
-  var request = new XMLHttpRequest();
+  const request = new XMLHttpRequest();
 
   const url = `https://en.wikipedia.org/w/api.php?
     action=query&
@@ -49,75 +45,54 @@ function fetchJson(searchTerm, callback) {
     }
   };
 
-  request.onerror = function() {
-  };
+  request.onerror = function() {};
 
   request.send();
 }
 
-function updateSearch()
-{
+function updateSearch() {
   let searchTerm = document.getElementById('search-input').value;
 
-  if (searchTerm)
-  {
-    fetchJson(
-      searchTerm,
-      function(data)
-      {
-        if (!data || !data.query)
-        {
-          document.getElementById('clear-button').style.display = 'none';
-          hideSearchResultContainers();
-        }
-        else
-        {
-          document.getElementById('clear-button').style.display = 'initial';
-          populateSearchResults(data.query.pages);
-        }
+  if (searchTerm) {
+    fetchJson(searchTerm, function(data) {
+      if (!data || !data.query) {
+        document.getElementById('clear-button').style.display = 'none';
+        hideSearchResultContainers();
+      } else {
+        document.getElementById('clear-button').style.display = 'initial';
+        populateSearchResults(data.query.pages);
       }
-    );
-  }
-  else
-  {
+    });
+  } else {
     document.getElementById('clear-button').style.display = 'none';
     hideSearchResultContainers();
   }
 }
 
-function populateSearchResults(pages)
-{
+function populateSearchResults(pages) {
   const pageCount = pages.length;
   // console.log('populateSearchResults: '' + pageCount );
 
-  for (let e = 0; e < searchResultCount; ++e)
-  {
+  for (let e = 0; e < searchResultCount; ++e) {
     let container = searchResultContainers[e];
 
     hideSearchResultContainer(container);
 
-    if (e < pageCount)
-    {
+    if (e < pageCount) {
       let page = pages[e];
 
       container.link.href = 'http://en.wikipedia.org/wiki?curid=' + page.pageid;
 
-      let nodeImg = container.getChild
+      let nodeImg = container.getChild;
 
       let thumbnail = page.thumbnail;
-      if (thumbnail)
-      {
+      if (thumbnail) {
         container.img.style.display = 'none';
-
         container.img.width = thumbnail.width;
         container.img.height = thumbnail.height;
-
         container.img.src = thumbnail.source;
-
-        container.img.style.display = 'block';//'initial';
-      }
-      else
-      {
+        container.img.style.display = 'block'; //'initial';
+      } else {
         container.img.style.display = 'none';
         container.img.src = '';
         container.img.width = thumbnailSize;
@@ -126,30 +101,26 @@ function populateSearchResults(pages)
 
       container.title.innerHTML = page.title;
 
-      if (page.terms &&
-          page.terms.description &&
-          page.terms.description.length >= 1)
-      {
+      if (
+        page.terms &&
+        page.terms.description &&
+        page.terms.description.length >= 1
+      ) {
         container.description.style.display = 'initial';
         container.description.innerHTML = page.terms.description[0];
-      }
-      else
-      {
+      } else {
         container.description.style.display = 'none';
         container.description.innerHTML = '';
       }
 
       showSearchResultContainer(container);
-    }
-    else
-    {
+    } else {
       hideSearchResultContainer(container);
     }
   }
 }
 
-function createSearchResultElements()
-{
+function createSearchResultElements() {
   //  Find template element for search results
   let template = document.getElementById('search-result-template');
   template.id = '';
@@ -157,14 +128,12 @@ function createSearchResultElements()
   let fragment = document.createDocumentFragment();
 
   //  Make copies of template and store element references
-  for (let e = 0; e < searchResultCount; ++e)
-  {
+  for (let e = 0; e < searchResultCount; ++e) {
     let node = template.cloneNode(true);
 
-    let container =
-    {
+    let container = {
       node: node,
-      link: node,//.getElementsByTagName('a')[0],
+      link: node,
       img: node.getElementsByTagName('img')[0],
       title: node.getElementsByTagName('h2')[0],
       description: node.getElementsByTagName('p')[0]
@@ -178,23 +147,21 @@ function createSearchResultElements()
   const searchResultsElement = document.getElementById('search-results');
   searchResultsElement.append(fragment);
 
-  //  Remove template from document after getting size
+  //  Remove template from document
   template.remove();
 }
 
-function clearSearchTerms()
-{
+function clearSearchTerms() {
   document.getElementById('search-input').value = '';
   updateSearch();
 }
 
-function init()
-{
+function init() {
   createSearchResultElements();
 
   const searchInputElement = document.getElementById('search-input');
   searchInputElement.addEventListener('input', function() {
-      updateSearch();
+    updateSearch();
   });
 
   document.getElementById('clear-button').onclick = clearSearchTerms;
@@ -202,7 +169,6 @@ function init()
   updateSearch();
 }
 
-document.addEventListener('DOMContentLoaded', () =>
-{
-   init();
+document.addEventListener('DOMContentLoaded', () => {
+  init();
 });
