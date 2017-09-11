@@ -1,5 +1,4 @@
-const borderSize = 12;
-var thumbnailSize = 100;
+var thumbnailSize = 128;
 const searchResultCount = 12;
 var searchResultContainers = [];
 
@@ -110,16 +109,12 @@ function populateSearchResults(pages)
       {
         container.img.style.display = 'none';
 
-        let marginHorz = (borderSize / 2) + (thumbnailSize - thumbnail.width) / 2;
-        let marginVert = (borderSize / 2) + (thumbnailSize - thumbnail.height) / 2;
-        container.img.style.margin = marginVert + 'px ' + marginHorz + 'px';
-
         container.img.width = thumbnail.width;
         container.img.height = thumbnail.height;
 
         container.img.src = thumbnail.source;
 
-        container.img.style.display = 'initial';
+        container.img.style.display = 'block';//'initial';
       }
       else
       {
@@ -182,16 +177,6 @@ function createSearchResultElements()
   //  Add template copies to document
   const searchResultsElement = document.getElementById('search-results');
   searchResultsElement.append(fragment);
-
-  // Get the thumbnail div size after media queries.
-  // Hidden elements have a size of zero, so move the template
-  // element off the page, show it and then get the size.
-  template.style.position = 'absolute';
-  template.style.left = '-99999px';
-  template.style.display = 'initial';
-
-  let thumbnailDiv = template.getElementsByClassName('search-result-thumbnail')[0];
-  thumbnailSize = thumbnailDiv.clientWidth - borderSize;
 
   //  Remove template from document after getting size
   template.remove();
