@@ -1,3 +1,5 @@
+require('./polyfills');
+
 let thumbnailSize = 128;
 const searchResultCount = 12;
 const searchResultContainers = [];
