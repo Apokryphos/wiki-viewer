@@ -1,6 +1,6 @@
-var thumbnailSize = 128;
+let thumbnailSize = 128;
 const searchResultCount = 12;
-var searchResultContainers = [];
+const searchResultContainers = [];
 
 function hideSearchResultContainer(container) {
   container.node.style.display = 'none';
@@ -83,15 +83,13 @@ function populateSearchResults(pages) {
 
       container.link.href = 'http://en.wikipedia.org/wiki?curid=' + page.pageid;
 
-      let nodeImg = container.getChild;
-
       let thumbnail = page.thumbnail;
       if (thumbnail) {
         container.img.style.display = 'none';
         container.img.width = thumbnail.width;
         container.img.height = thumbnail.height;
         container.img.src = thumbnail.source;
-        container.img.style.display = 'block'; //'initial';
+        container.img.style.display = 'block';
       } else {
         container.img.style.display = 'none';
         container.img.src = '';
