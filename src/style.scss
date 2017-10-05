@@ -22,6 +22,10 @@ a, a:active, a:focus, a:hover, a:visited {
   text-decoration: none;
 }
 
+#search-result-template {
+  display: none;
+}
+
 /*
   Clear search terms button is initially hidden.
 */
